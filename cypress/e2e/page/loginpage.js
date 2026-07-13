@@ -17,10 +17,15 @@ class LoginPage {
     }
 
     verifyDashboard() {
-        // cy.url({ timeout: 15000 }).should("include", "dashboard");
-        cy.contains("Dashboard").should("be.visible");
-    }
+    // Wait for the login redirect
+    cy.url({ timeout: 30000 }).should("not.include", "login");
 
+    // Wait until the page is fully loaded
+    cy.get("body", { timeout: 30000 }).should("be.visible");
+
+    // Verify dashboard text
+    cy.contains("Dashboard", { timeout: 30000 }).should("be.visible");
+}
 }
 
 export default LoginPage;
