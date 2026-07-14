@@ -2,26 +2,27 @@ class MerchantManagementPage {
 
     openMerchant() {
 
-        cy.contains("Merchant Mgt.")
-            .should("be.visible")
-            .click();
+    cy.contains("p", "Merchant Mgt.")
+        .parent()
+        .click();
 
-        cy.wait(1000);
+    cy.contains("div", "Manage Merchants", { timeout: 10000 })
+        .should("be.visible")
+        .click({ force: true });
 
-        cy.contains("Manage Merchants")
-            .should("be.visible")
-            .click();
+    cy.url({ timeout: 15000 })
+        .should("include", "merchant-management");
 
-        cy.url().then((url) => {
-            cy.log(url);
-            console.log(url);
-        });
+}
 
-    }
+   verifyMerchant() {
 
-    verifyMerchant() {
-        cy.url().should("include", "merchant-management");
-        cy.contains("Merchant Management").should("be.visible");
+        cy.url({ timeout: 15000 })
+            .should("include", "merchant-management");
+
+        cy.get("input[placeholder*='Search']")
+            .should("be.visible");
+
     }
 
 }
