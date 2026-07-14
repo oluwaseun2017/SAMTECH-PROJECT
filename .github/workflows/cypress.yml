@@ -25,5 +25,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Google Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Run Cypress Tests
-        run: npx cypress run --spec "cypress/e2e/features/EndToEnd.feature"
+        run: npx cypress run --browser chrome --spec "cypress/e2e/features/EndToEnd.feature"
